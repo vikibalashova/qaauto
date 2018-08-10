@@ -26,8 +26,7 @@ public class badCodeExample {
         if (serchResults.size() ==10){
             System.out.println("Results count is correct."); }
             else{
-            System.out.println("Results count is incorrect.");
-        }
+            System.out.println("Results count is incorrect."); }
 
        /* int ok = serchResults.size();
         if (ok == 10) {
