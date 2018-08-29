@@ -1,22 +1,40 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class LinkedinHomePage {
-    private WebDriver browser;
+import static java.lang.Thread.sleep;
+
+public class LinkedinHomePage extends BasePage {
+    @FindBy(xpath = "//*[@id='profile-nav-item']")
     private WebElement profileNavigationItem;
+
+    @FindBy(xpath = "//input[@placeholder and @role]")
+    private WebElement searchField;
 
     public LinkedinHomePage(WebDriver browser) {
         this.browser = browser;
-        this.initElements();
+        PageFactory.initElements(browser, this);// this это вызов текущего класса
     }
 
-    private void initElements() {
-        this.profileNavigationItem = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
+    public boolean isLoaded(){
+        return profileNavigationItem.isDisplayed()
+                && getCurrentPageTitle().contains("LinkedIn")
+                && getCurrentPageUrl().contains("https://www.linkedin.com/feed/");
+
     }
 
-    public boolean isProfileNavigationItemDisplayed() {
-        return this.profileNavigationItem.isDisplayed();
+    public LlinkedinSearchPage search(String searchTerm) {
+        searchField.sendKeys(searchTerm);
+        searchField.sendKeys(Keys.ENTER);
+        try {
+            sleep(3000);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        return new LlinkedinSearchPage(browser);
     }
 }
 

@@ -13,6 +13,7 @@ public class badCodeExample {
         System.out.println("Hello World!!"); //out not using
         WebDriver browser = new FirefoxDriver();
         browser.get("http://google.com");
+
         //browser.findElement(By.id("lst-ib")).sendKeys("Selenium");
         WebElement queryField = browser.findElement(By.name("q"));
         queryField.sendKeys("Selenium");

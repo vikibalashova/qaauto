@@ -17,3 +17,26 @@ For example:(System.setProperty("webdriver.gecko.driver", "./src/main/resources/
 
 ## Cherrypick
 ## Cherrypick #2
+Home Task #7:
+1. Update LinkedinHomePage and LinkedinLoginSubmit page classes using PageFactory pattern (as it's done for LinkedinLoginPage class)
+2. Using PageObject and PageFactory patterns implement new Test scenario in a separate test class:
+- Open login page
+- Verify login page is loaded
+- Login with valid credentials
+- Verify home page is loaded
+- Search for 'hr' Searchterm
+- Verify Search page is loaded
+- Verify 10 results displayed on search page
+- Verify each result item contains searchterm
+
+Главная задача № 7:
+1. Обновите ссылки LinkedinHomePage и LinkedinLoginSubmit, используя шаблон PageFactory (как это делается для класса LinkedinLoginPage)
+2. Использование шаблонов PageObject и PageFactory реализует новый тестовый сценарий в отдельном тестовом классе:
+- Открытая страница входа
+- Подтвердить загрузку страницы входа в систему
+- Вход с действительными учетными данными
+- Подтверждена загрузка домашней страницы
+- Поиск «hr» Searchterm
+- загружена страница подтверждения поиска
+- Проверить 10 результатов, отображаемых на странице поиска.
+- Проверить, что каждый элемент результата содержит searchterm
