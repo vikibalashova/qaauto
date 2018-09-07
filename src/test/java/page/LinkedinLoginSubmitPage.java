@@ -1,4 +1,5 @@
-import org.openqa.selenium.By;
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,18 +16,23 @@ public class LinkedinLoginSubmitPage extends BasePage{
     private WebElement userPasswordValidationText;
 
 
+     /**
+     * constructor of LinkedinLoginSubmitPage class.
+     */
+
     public LinkedinLoginSubmitPage(WebDriver browser){
         this.browser=browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(alertBox, 10);
     }
 
     public String getAlertBoxText(){
         return alertBox.getText();
     }
 
-    public String getCurrentPageTitle() {return browser.getTitle();}
+   // public String getCurrentPageTitle() {return browser.getTitle();}
 
-    public String getCurrentPageUrl() {return browser.getCurrentUrl();}
+   // public String getCurrentPageUrl() {return browser.getCurrentUrl();}
 
     public boolean isLoaded(){
         return alertBox.isDisplayed()

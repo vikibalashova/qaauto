@@ -1,26 +1,14 @@
+package test;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import page.LinkedinHomePage;
+import page.LinkedinLoginPage;
+import page.LinkedinLoginSubmitPage;
 
-public class LinkedinLoginTest {
-    WebDriver browser;
-    LinkedinLoginPage linkedinLoginPage;
-
-    @BeforeMethod
-    public void beforeMethod() {
-        browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com");
-        linkedinLoginPage = new LinkedinLoginPage(browser);
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        browser.close();
-    }
+public class LinkedinLoginTest extends BaseTest {
 
     @DataProvider
     public Object[][] validFieldsCombination() {
@@ -33,7 +21,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "validFieldsCombination" )
     public void successfulLoginTest(String userEmail, String userPass) {
-        LinkedinHomePage linkedinHomePage = linkedinLoginPage.loginReturnHomePage(userEmail, userPass);
+        LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(userEmail, userPass);
 
         /*String pageTitle = browser.getTitle();
         String pageUrl = browser.getCurrentUrl();
@@ -46,10 +34,10 @@ public class LinkedinLoginTest {
 
     /*@Test
     public void negativeLoginTest() {
-        LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
+        page.LinkedinLoginPage linkedinLoginPage = new page.LinkedinLoginPage(browser);
         linkedinLoginPage.login("a@b.c", "password");
 
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
+        page.LinkedinLoginSubmitPage linkedinLoginSubmitPage = new page.LinkedinLoginSubmitPage(browser);
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. " +
                 "Проверьте и исправьте отмеченные поля.", "Alert box has incorrect message");
     }*/
@@ -65,7 +53,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "emptyFieldsCombination")
     public void validateEmptyUserEmailAndUserPassword(String userEmail, String userPass){
-        linkedinLoginPage.loginReturnLoginPage(userEmail, userPass);
+        linkedinLoginPage.login(userEmail, userPass);
         Assert.assertTrue(linkedinLoginPage.isLoaded(),
                 "User is not on login page.");
     }
@@ -84,7 +72,7 @@ public class LinkedinLoginTest {
                                              String userEmailValidationText,
                                              String userPassValidationText) {
         LinkedinLoginSubmitPage linkedinLoginSubmitPage =
-                linkedinLoginPage.loginReturnLoginSubmitPage(userEmail, userPass);
+                linkedinLoginPage.login(userEmail, userPass);
         Assert.assertTrue(linkedinLoginSubmitPage.isLoaded(),
                 "User is not on LoginSubmit page.");
 
@@ -104,17 +92,17 @@ public class LinkedinLoginTest {
     @Test
     public void negativeEmailLoginTest(){
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
-        linkedinLoginPage.loginReturnLoginSubmitPage("vikiqa8@gmail.com", " ");
+        linkedinLoginPage.login("vikiqa8@gmail.com", " ");
     }
     @Test
     public void negativePassLoginTest(){
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
-        linkedinLoginPage.loginReturnLoginPage(" ", "password");
+        linkedinLoginPage.login(" ", "password");
     }
     @Test
     public void negativeEmailAndWrongPassLoginTest(){
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
-        linkedinLoginPage.loginReturnLoginPage("vikiqa8@gmail.com", "pass");
+        linkedinLoginPage.login("vikiqa8@gmail.com", "pass");
 
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. " +
@@ -123,7 +111,7 @@ public class LinkedinLoginTest {
     @Test
     public void negativeWrongEmailAndRightPassLoginTest(){
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
-        linkedinLoginPage.loginReturnLoginPage("viki@gmail.com", "password");
+        linkedinLoginPage.login("viki@gmail.com", "password");
 
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. " +
@@ -132,7 +120,7 @@ public class LinkedinLoginTest {
     @Test
     public void negativeNotAllEmailLoginTest(){
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
-        linkedinLoginPage.loginReturnLoginPage("vikiqa8gmail.com", "password");
+        linkedinLoginPage.login("vikiqa8gmail.com", "password");
 
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. " +

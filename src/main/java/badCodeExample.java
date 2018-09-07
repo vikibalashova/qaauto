@@ -18,7 +18,7 @@ public class badCodeExample {
         WebElement queryField = browser.findElement(By.name("q"));
         queryField.sendKeys("Selenium");
         queryField.sendKeys(Keys.ENTER);
-        sleep(3000);//
+        sleep(3000);
 
         //verify that results list contains 10 elements
         List<WebElement> serchResults = browser.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
