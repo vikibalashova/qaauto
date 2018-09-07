@@ -1,11 +1,9 @@
 package test;
 
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import page.LinkedinHomePage;
-import page.LinkedinLoginPage;
 import page.LinkedinLoginSubmitPage;
 
 public class LinkedinLoginTest extends BaseTest {
@@ -22,11 +20,6 @@ public class LinkedinLoginTest extends BaseTest {
     @Test(dataProvider = "validFieldsCombination" )
     public void successfulLoginTest(String userEmail, String userPass) {
         LinkedinHomePage linkedinHomePage = linkedinLoginPage.login(userEmail, userPass);
-
-        /*String pageTitle = browser.getTitle();
-        String pageUrl = browser.getCurrentUrl();
-        Assert.assertEquals(pageTitle, "LinkedIn", "Home page Title is wrong.");
-        Assert.assertEquals(pageUrl, "https://www.linkedin.com/feed/", "Home page Url is wrong.");*/
 
         Assert.assertTrue(linkedinHomePage.isLoaded(),
                 "Home page is not loaded.");
@@ -46,8 +39,6 @@ public class LinkedinLoginTest extends BaseTest {
     public Object[][] emptyFieldsCombination() {
         return new Object[][]{
                 { "", ""},
-                { "", "P@ssword123" },
-                { "someone@domain.com", "" }
         };
     }
 
@@ -89,7 +80,7 @@ public class LinkedinLoginTest extends BaseTest {
     }
 
 
-    @Test
+    /*@Test
     public void negativeEmailLoginTest(){
         LinkedinLoginPage linkedinLoginPage = new LinkedinLoginPage(browser);
         linkedinLoginPage.login("vikiqa8@gmail.com", " ");
@@ -125,7 +116,7 @@ public class LinkedinLoginTest extends BaseTest {
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(), "При заполнении формы были допущены ошибки. " +
                 "Проверьте и исправьте отмеченные поля.", "Alert box has incorrect message");
-    }
+    }*/
 
 
 }

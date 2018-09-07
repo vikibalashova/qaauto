@@ -13,6 +13,8 @@ public class BaseTest {
     WebDriver browser;
     LinkedinLoginPage linkedinLoginPage;
 
+    //mvn clean install -DsuiteName=login-tests.xml
+
     @Parameters({"browserName","envURL"})
 
     @BeforeMethod
@@ -31,24 +33,7 @@ public class BaseTest {
             }
         }
 
-        browser.get("https://www.linkedin.com");
-
-        if(envURL.toLowerCase().equals("ua.linkedin.com")){
-            browser.get("https://www.ua.linkedin.com");
-        }
-        if(envURL.toLowerCase().equals("ru.linkedin.com")) {
-            browser.get("https://www.ru.linkedin.com");
-        }
-            if(envURL.toLowerCase().equals("de.linkedin.com")){
-                browser.get("https://www.de.linkedin.com");
-            }
-        else{
-            try {
-                throw new Exception("envURL" + envURL +"is not supported.");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+       browser.get(envURL);
 
         linkedinLoginPage = new LinkedinLoginPage(browser);
     }
